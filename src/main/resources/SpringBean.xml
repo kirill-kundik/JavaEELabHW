@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="helloBean" class="app.HelloWorld">
+        <property name="name" value="Glybovets"/>
+    </bean>
+
+    <bean id="client" class="app.Client">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="Kyrylo"/>
+    </bean>
+
+    <bean id="eventLogger" class="app.ConsoleEventLogger"/>
+
+    <bean id="app" class="app.App">
+        <constructor-arg index="0" ref="eventLogger"/>
+        <property name="client" ref="client"/>
+    </bean>
+
+</beans>
