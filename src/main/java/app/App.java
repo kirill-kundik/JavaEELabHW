@@ -19,6 +19,7 @@ public class App {
     private void logEvent(String msg) {
         String message = msg.replaceAll(client.getId() + "", client.getName());
         logger.logEvent(message);
+        logger.logEvent("Client's friends :" + String.join(" and ", client.getFriends()));
     }
 
     public static void main(String[] args) {

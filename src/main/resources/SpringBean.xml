@@ -10,6 +10,13 @@
     <bean id="client" class="app.Client">
         <constructor-arg index="0" value="1"/>
         <constructor-arg index="1" value="Kyrylo"/>
+        <property name="friends">
+            <list>
+                <value>Nick</value>
+                <value>Maks</value>
+                <value>Sanya</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="eventLogger" class="app.ConsoleEventLogger"/>

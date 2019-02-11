@@ -9,7 +9,7 @@ public class HelloWorld {
     }
 
     public void printHello() {
-        System.out.println("Spring3 : Hello " + name);
+        System.out.println("Spring 3: Hello " + name);
     }
 
 }
