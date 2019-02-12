@@ -1,6 +1,7 @@
 package app;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
@@ -31,6 +32,22 @@ public class App {
 
         App app = (App) context.getBean("app");
         app.logEvent("event called for user 1");
+
+        //Annotation application context
+
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.register(ApplicationConfiguration.class);
+        ctx.register(AdditionalConfiguration.class);
+        ctx.refresh();
+
+        Account account = ctx.getBean(Account.class);
+        System.out.println(account.getInfo());
+
+        Foo foo = ctx.getBean(Foo.class);
+        Bar bar = ctx.getBean(Bar.class);
+
+        foo.sayHello();
+        bar.sayHello();
 
     }
 
