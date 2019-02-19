@@ -1,11 +1,14 @@
 package app;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.util.List;
 
 public class Client {
 
     private int id;
     private String name;
+    @Value("#{'${my.list.of.strings}'.split(',')}")
     private List<String> friends;
 
     public Client(int id, String name) {

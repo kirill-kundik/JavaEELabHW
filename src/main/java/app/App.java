@@ -1,5 +1,6 @@
 package app;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -7,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class App {
 
     private EventLogger logger;
+    @Autowired
     private Client client;
 
     public App(EventLogger logger) {
@@ -30,15 +32,16 @@ public class App {
         HelloWorld obj = (HelloWorld) context.getBean("helloBean");
         obj.printHello();
 
-        App app = (App) context.getBean("app");
-        app.logEvent("event called for user 1");
-
-        //Annotation application context
-
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(ApplicationConfiguration.class);
         ctx.register(AdditionalConfiguration.class);
         ctx.refresh();
+
+        App app = ctx.getBean(App.class);
+        app.logEvent("event called for user 1");
+
+        //Annotation application context
+
 
         Account account = ctx.getBean(Account.class);
         System.out.println(account.getInfo());
