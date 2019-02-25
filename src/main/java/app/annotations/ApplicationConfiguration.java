@@ -1,5 +1,8 @@
-package app;
+package app.annotations;
 
+import app.first_start.Client;
+import app.first_start.logger.ConsoleEventLogger;
+import app.first_start.logger.EventLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

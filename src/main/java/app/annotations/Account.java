@@ -1,4 +1,6 @@
-package app;
+package app.annotations;
+
+import app.first_start.Client;
 
 public class Account {
 

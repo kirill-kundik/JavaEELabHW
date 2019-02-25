@@ -1,5 +1,8 @@
-package app;
+package app.annotations;
 
+import app.first_start.Client;
+import app.first_start.logger.EventLogger;
+import app.first_start.HelloWorld;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -51,7 +54,6 @@ public class App {
 
         foo.sayHello();
         bar.sayHello();
-
     }
 
 }
