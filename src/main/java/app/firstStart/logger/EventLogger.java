@@ -1,4 +1,4 @@
-package app.first_start.logger;
+package app.firstStart.logger;
 
 public interface EventLogger {
     void logEvent(String msg);

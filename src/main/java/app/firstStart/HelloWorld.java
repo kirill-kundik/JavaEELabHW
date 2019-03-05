@@ -1,4 +1,4 @@
-package app.first_start;
+package app.firstStart;
 
 public class HelloWorld {
 

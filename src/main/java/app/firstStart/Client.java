@@ -1,4 +1,4 @@
-package app.first_start;
+package app.firstStart;
 
 import org.springframework.beans.factory.annotation.Value;
 
