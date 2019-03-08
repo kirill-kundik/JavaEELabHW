@@ -9,20 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class WorkWithTeacher {
 
     @Autowired
-    private TeachersDAO teachersDao;
+    private TeachersDAO teacherDAO;
 
     public Teacher addTeacher(Teacher teacher) {
-        teachersDao.addTeacher(teacher);
+        teacherDAO.addTeacher(teacher);
         System.out.println("Teacher has been added " + teacher);
         return teacher;
     }
 
     public Teacher getTeacherById(int id) {
-        return teachersDao.getTeacherById(id);
+        return teacherDAO.getTeacherById(id);
     }
 
     public void saveTacher(Teacher teacher) {
-        teachersDao.saveTacher(teacher);
+        teacherDAO.saveTacher(teacher);
         System.out.println("Teacher has been saved " + teacher);
     }
 
