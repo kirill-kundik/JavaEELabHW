@@ -12,7 +12,7 @@ import java.util.Date;
 public class App {
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("SpringBeansDB.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("db/entry/SpringBeansDB.xml");
         WorkWithStudent worker =
                 (WorkWithStudent) context.getBean("worker");
 //new WorkWithStudent();
