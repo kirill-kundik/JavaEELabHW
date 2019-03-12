@@ -21,7 +21,8 @@
     </build>
 
     <properties>
-        <spring.ver>3.2.13.RELEASE</spring.ver>
+        <spring.ver>5.1.5.RELEASE</spring.ver>
+        <hibernate.ver>5.4.1.Final</hibernate.ver>
     </properties>
 
     <dependencies>
@@ -90,23 +91,17 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>3.6.10.Final</version>
+            <version>${hibernate.ver}</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>3.5.6-Final</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-annotations</artifactId>-->
+            <!--<version>${hibernate.ver}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.6.10.Final</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>javassist</artifactId>
-                    <groupId>javassist</groupId>
-                </exclusion>
-            </exclusions>
+            <version>${hibernate.ver}</version>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
@@ -126,11 +121,6 @@
             <version>3.12.1.GA</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.18.2-GA</version>
-        </dependency>
 
     </dependencies>
 

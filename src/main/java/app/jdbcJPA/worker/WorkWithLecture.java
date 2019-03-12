@@ -3,7 +3,9 @@ package app.jdbcJPA.worker;
 import app.jdbcJPA.data.dao.LecturesDAO;
 import app.jdbcJPA.data.entities.Lecture;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class WorkWithLecture {
 
     @Autowired

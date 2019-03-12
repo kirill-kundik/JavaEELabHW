@@ -13,7 +13,7 @@ public class App {
         Lecture lecture = new Lecture();
         lecture.setName("Introduction to Spring");
         lecture.setCredits(2.5);
-        WorkWithLecture worker = (WorkWithLecture)context.getBean("worker");
+        WorkWithLecture worker = (WorkWithLecture) context.getBean("worker");
         worker.addLecture(lecture);
 
 
