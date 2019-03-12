@@ -3,7 +3,7 @@ package app.jdbcEntry.data.dao.impl;
 import app.jdbcEntry.data.entities.Student;
 import app.jdbcEntry.data.dao.StudentsDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -13,7 +13,7 @@ public class JdbcStudentDAO implements StudentsDAO {
     private static final String SQL_SELECT_STUDENT_BY_ID = "SELECT id, pib, course FROM students WHERE id = ?";
 
     @Autowired
-    private SimpleJdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void addStudent(Student student) {
