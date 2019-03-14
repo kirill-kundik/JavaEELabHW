@@ -28,8 +28,13 @@ public class App {
 
         System.out.println(customerWorker.getAllCustomers());
         System.out.println("Get customer by last name\n");
-        System.out.println(customerWorker.getCustomersByName("Kundik"));
         System.out.println(customerWorker.getCustomersByName("Mariel"));
+        System.out.println("\nGet customer by last name Kundik");
+        System.out.println(customerWorker.getCustomersByName("Kundik"));
+        System.out.println("\nGet customer by last name Kundik again");
+        System.out.println(customerWorker.getCustomersByName("Kundik"));
+        System.out.println("\nGet customer by last name Kundik again");
+        System.out.println(customerWorker.getCustomersByName("Kundik"));
 
     }
 

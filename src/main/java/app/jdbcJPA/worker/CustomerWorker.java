@@ -22,7 +22,7 @@ public class CustomerWorker {
     }
 
     public List<Customer> getCustomersByName(String name) {
-        return customerService.getCustomerByName(name);
+        return customerService.getCustomersByName(name);
     }
 
 }

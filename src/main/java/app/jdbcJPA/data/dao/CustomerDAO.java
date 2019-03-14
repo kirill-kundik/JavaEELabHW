@@ -10,7 +10,7 @@ public interface CustomerDAO {
 
     public Customer getCustomerById(Long id);
 
-    public List<Customer> getCustomerByName(String name);
+    public List<Customer> getCustomersByName(String name);
 
     public List<Customer> getCustomers();
 

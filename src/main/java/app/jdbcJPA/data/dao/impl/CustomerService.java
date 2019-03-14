@@ -2,6 +2,7 @@ package app.jdbcJPA.data.dao.impl;
 
 import app.jdbcJPA.data.dao.CustomerDAO;
 import app.jdbcJPA.data.entities.Customer;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,19 +25,25 @@ public class CustomerService implements CustomerDAO {
     }
 
     @Override
+    @Cacheable("customersCache")
     public Customer getCustomerById(Long id) {
+        System.out.println("called CustomerService.getCustomerById(" + id + ")");
         return em.find(Customer.class, id);
     }
 
     @Override
-    public List<Customer> getCustomerByName(String name) {
+    @Cacheable("customersCache")
+    public List<Customer> getCustomersByName(String name) {
+        System.out.println("called CustomerService.getCustomersByName(" + name + ")");
         Query query = em.createNamedQuery("Customer.findByName");
         query.setParameter("fname", name);
         return query.getResultList();
     }
 
     @Override
+    @Cacheable("customersCache")
     public List<Customer> getCustomers() {
+        System.out.println("called CustomerService.getCustomers()");
         Query query = em.createNamedQuery("Customer.findAll", Customer.class);
         return query.getResultList();
     }
