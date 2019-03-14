@@ -21,10 +21,10 @@ public class App {
         lecture.setName("Introduction to Spring");
         lecture.setCredits(2.5);
         WorkWithLecture worker = (WorkWithLecture) context.getBean("worker");
-//        worker.addLecture(lecture);
+        worker.addLecture(lecture);
 
         CustomerWorker customerWorker = context.getBean(CustomerWorker.class);
-//        customerWorker.addCustomers(App.generateCustomers());
+        customerWorker.addCustomers(App.generateCustomers());
 
         System.out.println(customerWorker.getAllCustomers());
         System.out.println("Get customer by last name\n");

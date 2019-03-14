@@ -16,7 +16,7 @@ public class Customer {
     public static final String FIND_BY_NAME = "Customer.findByName";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Version
     @Column(name = "c_version")
