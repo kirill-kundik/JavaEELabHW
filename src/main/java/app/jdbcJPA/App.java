@@ -4,6 +4,7 @@ import app.jdbcJPA.data.entities.Address;
 import app.jdbcJPA.data.entities.Customer;
 import app.jdbcJPA.data.entities.Lecture;
 import app.jdbcJPA.worker.CustomerWorker;
+import app.jdbcJPA.worker.PropertyPlaceholderConfigurer;
 import app.jdbcJPA.worker.WorkWithLecture;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,6 +36,9 @@ public class App {
         System.out.println(customerWorker.getCustomersByName("Kundik"));
         System.out.println("\nGet customer by last name Kundik again");
         System.out.println(customerWorker.getCustomersByName("Kundik"));
+
+        PropertyPlaceholderConfigurer values = context.getBean(PropertyPlaceholderConfigurer.class);
+        System.out.println(values.getValues());
 
     }
 

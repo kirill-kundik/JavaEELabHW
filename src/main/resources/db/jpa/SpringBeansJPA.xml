@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
               http://www.springframework.org/schema/beans/spring-beans.xsd
               http://www.springframework.org/schema/tx
@@ -22,6 +24,7 @@
         <property name="maxTotal" value="10"/>
     </bean>
 
+    <!--setting up JPA-->
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="database" value="POSTGRESQL"/>
         <property name="showSql" value="true"/>
@@ -29,33 +32,55 @@
         <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
     </bean>
 
+    <!--Entity manager-->
     <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation" value="db/jpa/persistence.xml"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
     </bean>
 
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    <!--JPA Transaction manager-->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="emf"/>
-        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaDialect" ref="jpaDialect"/>
     </bean>
 
+    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+    <!--entity annotations-->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <!--Class workers for testing-->
     <bean id="worker" class="app.jdbcJPA.worker.WorkWithLecture"/>
     <bean id="customerWorker" class="app.jdbcJPA.worker.CustomerWorker"/>
 
-    <context:component-scan base-package="app.jdbcJPA.data"/>
-    <tx:annotation-driven/>
-
-    <cache:annotation-driven/>
+    <!--Setting up Ehcache-->
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
           p:cache-manager-ref="ehcache"/>
     <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
           p:config-location="db/jpa/ehcache.xml" p:shared="true"/>
+
+    <!--Annotations scan-->
+    <context:component-scan base-package="app.jdbcJPA.data"/>
+    <tx:annotation-driven/>
+    <cache:annotation-driven/>
+
+    <!--Testing properties from properties file-->
+    <context:property-placeholder location="classpath:env.properties" />
+
+    <bean id="propertyConfigurer" class="app.jdbcJPA.worker.PropertyPlaceholderConfigurer">
+        <property name="values">
+            <list>
+                <value>${persistentUnitName}</value>
+                <value>${taskPhotoFolder}</value>
+                <value>${userPhotoFolder}</value>
+            </list>
+        </property>
+    </bean>
 
 </beans>

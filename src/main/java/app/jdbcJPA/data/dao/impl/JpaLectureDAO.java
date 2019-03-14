@@ -3,13 +3,11 @@ package app.jdbcJPA.data.dao.impl;
 import app.jdbcJPA.data.dao.LecturesDAO;
 import app.jdbcJPA.data.entities.Lecture;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-@Transactional
 public class JpaLectureDAO implements LecturesDAO {
 
     @PersistenceContext

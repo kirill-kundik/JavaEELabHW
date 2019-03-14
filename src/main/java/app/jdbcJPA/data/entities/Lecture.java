@@ -37,4 +37,13 @@ public class Lecture {
     public void setCredits(double credits) {
         this.credits = credits;
     }
+
+    @Override
+    public String toString() {
+        return "Lecture{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", credits=" + credits +
+                '}';
+    }
 }

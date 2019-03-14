@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Repository
 @Transactional
@@ -49,7 +50,16 @@ public class CustomerService implements CustomerDAO {
     }
 
     @Override
-    public void saveCustomer(Customer customer) {
-        em.merge(customer);
+    public void saveCustomer(final Customer customer) {
+        try {
+            em.getTransaction().begin();
+            em.merge(customer);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 }
