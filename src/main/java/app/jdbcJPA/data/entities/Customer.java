@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "customer")
 @NamedQueries({
         @NamedQuery(name = Customer.FIND_ALL, query = "SELECT c FROM Customer c"),
-        @NamedQuery(name = Customer.FIND_BY_NAME, query = "SELECT NEW Customer(c.firstName, c.lastName) FROM Customer c WHERE c.lastName = :fname")
+        @NamedQuery(name = Customer.FIND_BY_NAME, query = "SELECT с FROM Customer с WHERE с.lastName = :fname")
 })
 public class Customer {
 

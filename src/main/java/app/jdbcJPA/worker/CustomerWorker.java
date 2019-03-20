@@ -3,12 +3,9 @@ package app.jdbcJPA.worker;
 import app.jdbcJPA.data.dao.CustomerDAO;
 import app.jdbcJPA.data.entities.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class CustomerWorker {
 
     @Autowired
@@ -26,9 +23,12 @@ public class CustomerWorker {
         return customerService.getCustomersByName(name);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public void saveCustomer(Customer customer) {
-        customerService.saveCustomer(customer);
-        System.out.println("Customer saved");
+        try {
+            customerService.saveCustomer(customer);
+            System.out.println("Customer saved");
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
     }
 }

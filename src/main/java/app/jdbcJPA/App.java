@@ -25,7 +25,7 @@ public class App {
         worker.addLecture(lecture);
 
         CustomerWorker customerWorker = context.getBean(CustomerWorker.class);
-        customerWorker.addCustomers(App.generateCustomers());
+//        customerWorker.addCustomers(App.generateCustomers());
 
         System.out.println(customerWorker.getAllCustomers());
         System.out.println("Get customer by last name\n");
@@ -35,7 +35,10 @@ public class App {
         System.out.println("\nGet customer by last name Kundik again");
         System.out.println(customerWorker.getCustomersByName("Kundik"));
         System.out.println("\nGet customer by last name Kundik again");
-        System.out.println(customerWorker.getCustomersByName("Kundik"));
+        Customer customer = customerWorker.getCustomersByName("Kundik").get(0);
+        System.out.println(customer);
+        customer.setPhoneNumber("123");
+        customerWorker.saveCustomer(customer);
 
         PropertyPlaceholderConfigurer values = context.getBean(PropertyPlaceholderConfigurer.class);
         System.out.println(values.getValues());

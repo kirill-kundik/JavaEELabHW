@@ -1,6 +1,7 @@
 package app.jdbcJPA.data.dao;
 
 import app.jdbcJPA.data.entities.Customer;
+import app.jdbcJPA.exceptions.IllegalPhoneNumberException;
 
 import java.util.List;
 
@@ -14,6 +15,6 @@ public interface CustomerDAO {
 
     public List<Customer> getCustomers();
 
-    public void saveCustomer(Customer customer);
+    public void saveCustomer(Customer customer) throws IllegalPhoneNumberException;
 
 }

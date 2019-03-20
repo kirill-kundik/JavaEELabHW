@@ -2,6 +2,7 @@ package app.jdbcJPA.data.dao.impl;
 
 import app.jdbcJPA.data.dao.CustomerDAO;
 import app.jdbcJPA.data.entities.Customer;
+import app.jdbcJPA.exceptions.IllegalPhoneNumberException;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,19 +13,20 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-@Transactional
 public class CustomerService implements CustomerDAO {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
+    @Transactional
     public Customer addCustomer(Customer customer) {
         em.persist(customer);
         return customer;
     }
 
     @Override
+    @Transactional
     @Cacheable("customersCache")
     public Customer getCustomerById(Long id) {
         System.out.println("called CustomerService.getCustomerById(" + id + ")");
@@ -32,6 +34,7 @@ public class CustomerService implements CustomerDAO {
     }
 
     @Override
+    @Transactional
     @Cacheable("customersCache")
     public List<Customer> getCustomersByName(String name) {
         System.out.println("called CustomerService.getCustomersByName(" + name + ")");
@@ -41,6 +44,7 @@ public class CustomerService implements CustomerDAO {
     }
 
     @Override
+    @Transactional
     @Cacheable("customersCache")
     public List<Customer> getCustomers() {
         System.out.println("called CustomerService.getCustomers()");
@@ -49,16 +53,12 @@ public class CustomerService implements CustomerDAO {
     }
 
     @Override
-    public void saveCustomer(final Customer customer) {
-        try {
-            em.getTransaction().begin();
-            em.merge(customer);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            System.err.println(e.toString());
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
+    @Transactional
+    public void saveCustomer(final Customer customer) throws IllegalPhoneNumberException {
+        if (9 > customer.getPhoneNumber().length() || customer.getPhoneNumber().length() > 15)
+            throw new IllegalPhoneNumberException("This phone is not valid");
+        em.merge(customer);
+
     }
+
 }
